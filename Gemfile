@@ -30,6 +30,9 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
+# Adds Devise to avoid problems with Devise Token Auth
+gem "devise"
+
 # Use Devise Token Auth for authentication using tokens
 gem "devise_token_auth", ">= 1.2.0", git: "https://github.com/lynndylanhurley/devise_token_auth"
 
@@ -45,6 +48,13 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+end
+
+group :development, :test do
+  # Uses RSpec framework for testing
+  gem 'rspec-rails', '~> 6.0.0.rc1'
+  # Creates fake data for testing
+  gem 'factory_bot_rails'
 end
 
 group :development do
