@@ -18,10 +18,9 @@ class User < ActiveRecord::Base
 
   # User can have different statuses
   enum status: {
-    'Registered': 0,
-    'Active': 1,
-    'Suspended': 2,
-    'Removed': 3
+    'Active': 0,
+    'Suspended': 1,
+    'Removed': 2
   }
 
   def admin?
