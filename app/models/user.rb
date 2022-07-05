@@ -23,4 +23,8 @@ class User < ActiveRecord::Base
     'Suspended': 2,
     'Removed': 3
   }
+
+  def admin?
+    self.role == 'Admin'
+  end
 end

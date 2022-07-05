@@ -6,6 +6,9 @@ module Api::V1::Admin
     # Devise method that verifies if user is logged in
     before_action :authenticate_user!
 
+    # Custom method to only allow admins to use these requests
+    before_action :authenticate_admin!
+
     # Destroys user
     def destroy
 
