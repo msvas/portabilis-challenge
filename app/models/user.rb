@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
+  # Name must be informed when dealing with object
+  validates :name, presence: true
+
   # Column in the DB to control user role
   enum role: {
     'Regular': 0,

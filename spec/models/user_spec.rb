@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe "Validations" do
+    it "is valid with attributes" do
+      expect(FactoryBot.create(:user, name: 'test')).to be_valid
+    end
+  end
 end

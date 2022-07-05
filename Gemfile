@@ -55,6 +55,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.0.0.rc1'
   # Creates fake data for testing
   gem 'factory_bot_rails'
+  # Fake data generator
+  gem 'faker'
+  # Windows compatibility
+  gem 'ffi'
 end
 
 group :development do
