@@ -13,7 +13,7 @@ module Api::V1::Admin
     # Destroys user
     def destroy
       if @user.destroy
-        render json: { message: 'User deleted' }, status: :success
+        render json: { message: 'User deleted' }, status: :ok
       else
         render json: { error: 'Could not complete request' }, status: :unprocessable_entity
       end
@@ -22,7 +22,7 @@ module Api::V1::Admin
     # Changes user status to suspended
     def suspend
       if @user.update(status: User.statuses['Suspended'])
-        render json: { message: 'User suspended' }, status: :success
+        render json: { message: 'User suspended' }, status: :ok
       else
         render json: { error: 'Could not complete request' }, status: :unprocessable_entity
       end
