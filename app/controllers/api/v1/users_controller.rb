@@ -2,7 +2,7 @@
 
 module Api::V1
   # Controller with methods only available to admins
-  class UsersControllers < ApplicationController
+  class UsersController < ApplicationController
     # Devise method that verifies if user is logged in
     before_action :authenticate_user!
 
