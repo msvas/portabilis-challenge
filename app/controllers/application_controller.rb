@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   # Global controllers method to check if user is admin
   def authenticate_admin!
     unless current_user.admin?
-      render json: { error: 'Access denied' }, status: :unauthorizes
+      render json: { error: 'Access denied' }, status: :unauthorized
     end
   end
 

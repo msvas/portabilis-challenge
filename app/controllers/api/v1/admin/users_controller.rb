@@ -8,10 +8,11 @@ module Api::V1::Admin
     # Custom method to only allow admins to use these requests
     before_action :authenticate_admin!
     # Sets user before running method
-    before_action :set_user
+    before_action :set_user, only: [:suspend]
 
     # Destroys user
     def destroy
+      @user = User.find(user_params[:id])
       if @user.destroy
         render json: { message: 'User deleted' }, status: :ok
       else
@@ -24,7 +25,7 @@ module Api::V1::Admin
       status = User.statuses['Suspended']
       status = User.statuses['Active'] if @user.status == 'Suspended'
       if @user.update(status: status)
-        render json: { message: 'Updated user status' }, status: :ok
+        render json: { message: 'Updated user status', status: @user.status }, status: :ok
       else
         render json: { error: 'Could not complete request' }, status: :unprocessable_entity
       end
@@ -33,12 +34,12 @@ module Api::V1::Admin
     private
 
     def set_user
-      @user = User.find(user_params[:id])
+      @user = User.find(user_params[:user_id])
     end
 
     # Only allow the params we need for security reasons
     def user_params
-      params.require(:user).permit(:id)
+      params.permit(:user_id, :id)
     end
 
   end
