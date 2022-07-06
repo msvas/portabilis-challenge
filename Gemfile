@@ -74,4 +74,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  # Clear database between tests
+  gem "database_cleaner"
 end
