@@ -37,7 +37,10 @@ class User < ActiveRecord::Base
   # Class function to search for users (and we can test it)
   def self.search_users(keyword)
     results = nil
-    results = User.where('name ILIKE (?) OR email ILIKE (?)', "%#{keyword}%", "%#{keyword}%") if keyword.present?
+    if keyword.present?
+      results = User.where('unaccent(name) ILIKE unaccent(?) OR email ILIKE (?)', 
+                            "%#{keyword}%", "%#{keyword}%")
+    end
     results
   end
 
