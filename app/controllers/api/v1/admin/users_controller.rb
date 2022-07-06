@@ -2,7 +2,7 @@
 
 module Api::V1::Admin
   # Controller with methods only available to admins
-  class UsersControllers < ApplicationController
+  class UsersController < ApplicationController
     # Devise method that verifies if user is logged in
     before_action :authenticate_user!
     # Custom method to only allow admins to use these requests
@@ -21,8 +21,10 @@ module Api::V1::Admin
 
     # Changes user status to suspended
     def suspend
-      if @user.update(status: User.statuses['Suspended'])
-        render json: { message: 'User suspended' }, status: :ok
+      status = User.statuses['Suspended']
+      status = User.statuses['Active'] if @user.status == 'Suspended'
+      if @user.update(status: status)
+        render json: { message: 'Updated user status' }, status: :ok
       else
         render json: { error: 'Could not complete request' }, status: :unprocessable_entity
       end
