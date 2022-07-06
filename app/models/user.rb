@@ -34,9 +34,11 @@ class User < ActiveRecord::Base
     'Removed': 2
   }
 
-  # Class function to search users
-  def self.search_user
-
+  # Class function to search for users (and we can test it)
+  def self.search_users(keyword)
+    results = nil
+    results = User.where('name ILIKE (?) OR email ILIKE (?)', "%#{keyword}%", "%#{keyword}%") if keyword.present?
+    results
   end
 
   # Checks if instance is admin
