@@ -20,7 +20,12 @@ module Api::V1
 
     # Searches for users using a keyword
     def search
-      results = User.search_users(search_params[:keyword])
+      if params[:keyword].present?
+        results = User.search_users(params[:keyword])
+      else
+        results = User.all
+      end
+      results = results.order(params[:sort]) if params[:sort].present? && params[:sort].any?
       render json: results, status: :ok
     end
 

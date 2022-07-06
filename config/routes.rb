@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       end
 
       resources :users, only: [:index] do
-        post 'search', to: 'users#search', as: 'search'
+        post 'search', to: 'users#search', as: 'search', on: :collection
       end
     end
   end
