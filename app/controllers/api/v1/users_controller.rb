@@ -11,5 +11,9 @@ module Api::V1
       users = User.all.includes(:email, :name)
       render json: users, status: :ok
     end
+
+    def search
+
+    end
   end
 end
