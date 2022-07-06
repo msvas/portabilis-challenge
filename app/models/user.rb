@@ -16,6 +16,11 @@ class User < ActiveRecord::Base
   scope :active_users, -> { where(role: User.statuses['Active']) }
   scope :suspended_users, -> { where(role: User.statuses['Suspended']) }
 
+  # Scopes to order data
+  scope :order_by_name, -> { order(name: :desc) }
+  scope :order_by_email, -> { order(email: :desc) }
+  scope :order_by_role, -> { order(role: :desc) }
+
   # Column in the DB to control user role
   enum role: {
     'Regular': 0,
@@ -29,7 +34,14 @@ class User < ActiveRecord::Base
     'Removed': 2
   }
 
+  # Class function to search users
+  def self.search_user
+
+  end
+
+  # Checks if instance is admin
   def admin?
     self.role == 'Admin'
   end
+
 end
