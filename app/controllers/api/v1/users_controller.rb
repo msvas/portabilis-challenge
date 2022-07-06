@@ -12,8 +12,16 @@ module Api::V1
       render json: users, status: :ok
     end
 
+    # Searches for users using a keyword
     def search
+      results = User.search_users(search_params[:keyword])
+      render json: results, status: :ok
+    end
 
+    private
+
+    def search_params
+      params.require(:keyword)
     end
   end
 end
