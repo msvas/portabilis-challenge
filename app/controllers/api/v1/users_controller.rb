@@ -8,7 +8,13 @@ module Api::V1
 
     # Shows all users and loads useful info
     def index
-      users = User.all.includes(:email, :name)
+      if params[:sort].present?
+        # Orders records by the column name informed in the 'sort' param
+        users = User.all
+                    .order(params[:sort])
+      else
+        users = User.all
+      end
       render json: users, status: :ok
     end
 
