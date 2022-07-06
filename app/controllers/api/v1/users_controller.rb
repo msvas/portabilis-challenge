@@ -11,7 +11,7 @@ module Api::V1
       if params[:sort].present?
         # Orders records by the column name informed in the 'sort' param
         users = User.all
-                    .order(params[:sort])
+                    .order(search_params[:sort].join(','))
       else
         users = User.all
       end
@@ -26,14 +26,14 @@ module Api::V1
         results = User.all
       end
       # Orders data if 'sort' param is informed
-      results = results.order(search_params[:sort]) if search_params[:sort].present? && search_params[:sort].any?
+      results = results.order(search_params[:sort].join(',')) if search_params[:sort].present? && search_params[:sort].any?
       render json: results, status: :ok
     end
 
     private
 
     def search_params
-      params.permit(:keyword, :sort)
+      params.permit(:keyword, sort: [])
     end
   end
 end
