@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   scope :order_by_email, -> { order(email: :desc) }
   scope :order_by_role, -> { order(role: :desc) }
 
+  # Uses callback to send welcome email
+  after_create :send_welcome_email
+
   # Column in the DB to control user role
   enum role: {
     'Regular': 0,
@@ -38,7 +41,7 @@ class User < ActiveRecord::Base
   def self.search_users(keyword)
     results = nil
     if keyword.present?
-      results = User.where('unaccent(name) ILIKE unaccent(?) OR email ILIKE (?)', 
+      results = User.where('unaccent(name) ILIKE unaccent(?) OR email ILIKE (?)',
                             "%#{keyword}%", "%#{keyword}%")
     end
     results
@@ -47,6 +50,13 @@ class User < ActiveRecord::Base
   # Checks if instance is admin
   def admin?
     self.role == 'Admin'
+  end
+
+  private
+
+  # Sends welcome email using background processing (sidekiq)
+  def send_welcome_email
+    UserMailer.welcome(self).deliver_later
   end
 
 end
