@@ -9,6 +9,15 @@ RSpec.describe "Users", type: :request do
       expect(response).to have_http_status(:unauthorized)
     end
 
+    it "suspended user can't retrieve data" do
+      user = FactoryBot.create(:user, :suspended)
+      # Helper that generate auth tokens to send with requests when testing
+      auth_headers = user.create_new_auth_token
+
+      post "/api/v1/users/search", params: { keyword: 'aa', sort: [''] }, headers: auth_headers
+      expect(response).to have_http_status(:unauthorized)
+    end
+
     it "searches users when logged in" do
       user1 = FactoryBot.create(:user, name: 'bb', email: 'bb@bb.com')
       user2 = FactoryBot.create(:user, name: 'aa', email: 'aa@aa.com')
@@ -71,6 +80,15 @@ RSpec.describe "Users", type: :request do
 
     it "does not retrieve users when not logged in" do
       get "/api/v1/users"
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it "suspended user can't retrieve data" do
+      user = FactoryBot.create(:user, :suspended)
+      # Helper that generate auth tokens to send with requests when testing
+      auth_headers = user.create_new_auth_token
+
+      get "/api/v1/users", headers: auth_headers
       expect(response).to have_http_status(:unauthorized)
     end
 
