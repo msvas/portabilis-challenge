@@ -8,7 +8,7 @@ module Api::V1
     # Custom method to only allow active users to use these requests
     before_action :user_active!
     # Caches index method so it can respond faster
-    caches_action :index
+    caches_action :index, expires_in: 1.minute
 
     # Shows all users and loads useful info
     def index
