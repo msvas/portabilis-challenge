@@ -42,6 +42,8 @@ GEM
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
+    actionpack-action_caching (1.2.2)
+      actionpack (>= 4.0.0)
     actiontext (7.0.3)
       actionpack (= 7.0.3)
       activerecord (= 7.0.3)
@@ -102,6 +104,7 @@ GEM
     concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
     crass (1.0.6)
+    dalli (3.2.2)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
     database_cleaner-active_record (2.0.1)
@@ -149,6 +152,7 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
     matrix (0.4.2)
+    memcachier (0.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
     minitest (5.15.0)
@@ -284,9 +288,11 @@ PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
+  actionpack-action_caching
   active_model_serializers
   bootsnap
   capybara
+  dalli
   database_cleaner
   debug
   devise
@@ -296,6 +302,7 @@ DEPENDENCIES
   ffi
   importmap-rails
   jbuilder
+  memcachier
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.3)

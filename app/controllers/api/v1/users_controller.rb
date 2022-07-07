@@ -7,16 +7,12 @@ module Api::V1
     before_action :authenticate_user!
     # Custom method to only allow active users to use these requests
     before_action :user_active!
+    # Caches index method so it can respond faster
+    caches_action :index
 
     # Shows all users and loads useful info
     def index
-      if params[:sort].present?
-        # Orders records by the column name informed in the 'sort' param
-        users = User.all
-                    .order(search_params[:sort].join(','))
-      else
-        users = User.all
-      end
+      users = User.all
       render json: users, status: :ok
     end
 

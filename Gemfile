@@ -48,6 +48,15 @@ gem "bootsnap", require: false
 # Uses serializers to format JSON data on responses
 gem "active_model_serializers"
 
+# Uses action caching for faster responses
+gem "actionpack-action_caching"
+
+# Cache store provider
+gem "dalli"
+
+# Helps with cache setup
+gem "memcachier"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
