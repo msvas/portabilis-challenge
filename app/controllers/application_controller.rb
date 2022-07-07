@@ -11,6 +11,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Global controllers method to check if user is active
+  def user_active!
+    unless current_user.active?
+      render json: { error: 'You are suspended, check with an admin.' }, status: :unauthorized
+    end
+  end
+
   private
 
   # Parameters allowed when signing up user

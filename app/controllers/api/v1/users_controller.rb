@@ -5,6 +5,8 @@ module Api::V1
   class UsersController < ApplicationController
     # Devise method that verifies if user is logged in
     before_action :authenticate_user!
+    # Custom method to only allow active users to use these requests
+    before_action :user_active!
 
     # Shows all users and loads useful info
     def index

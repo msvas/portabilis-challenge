@@ -7,6 +7,8 @@ module Api::V1::Admin
     before_action :authenticate_user!
     # Custom method to only allow admins to use these requests
     before_action :authenticate_admin!
+    # Custom method to only allow active users to use these requests
+    before_action :user_active!
     # Sets user before running method
     before_action :set_user, only: [:suspend]
 

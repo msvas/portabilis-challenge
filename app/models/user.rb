@@ -52,6 +52,11 @@ class User < ActiveRecord::Base
     self.role == 'Admin'
   end
 
+  # Checks if instance is active
+  def active?
+    self.status == 'Active'
+  end
+
   private
 
   # Sends welcome email using background processing (sidekiq)
