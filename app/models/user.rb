@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   # Name must be informed when dealing with object
   validates :name, presence: true
+  # Email must be unique - database already checks that, but safety always comes first ;)
+  validates :email, uniqueness: true
 
   # Scopes to help when retrieving data
   scope :admins, -> { where(role: User.roles['Admin']) }

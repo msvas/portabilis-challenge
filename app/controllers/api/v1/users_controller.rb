@@ -24,7 +24,7 @@ module Api::V1
         results = User.all
       end
       # Uses variable to control direction value, if informed
-      search_params[:direction].present? ? direction = search_params[:direction] : direction = ''
+      search_params[:direction].present? && search_params[:direction] == 'desc' ? direction = 'desc' : direction = ''
       # Orders data if 'sort' param is informed
       results = results.order(search_params[:sort].join(',') + " #{direction}") if search_params[:sort].present? && search_params[:sort].any?
       render json: results, status: :ok

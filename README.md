@@ -15,6 +15,9 @@ As ações disponíveis e seus endpoints estão listados a seguir:
 * Login de usuário - POST /auth/sign_in
 * Lista de usuários (apenas logado) - GET /api/v1/users
 * Busca de usuários, com ordenação (apenas logado) - POST /api/v1/users/search
+  - keyword -> string (ex: "keyword":"jorge")
+  - sort -> array, com valores 'name', 'role' ou 'email' (ex: "sort":["name"])
+  - direction -> string, com valores 'asc' ou 'desc' (ex: "direction":"asc")
 * Remoção de usuário (admin apenas) - DELETE /api/v1/admin/users/:user_id
 * Suspensão/ativação de usuário (admin apenas) - GET /api/v1/admin/users/:user_id/suspend
 
