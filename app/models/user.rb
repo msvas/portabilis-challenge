@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   scope :order_by_role, -> { order(role: :desc) }
 
   # Uses callback to send welcome email
-  after_create :send_welcome_email
+  after_create_commit :send_welcome_email
 
   # Column in the DB to control user role
   enum role: {
