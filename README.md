@@ -3,7 +3,12 @@
 Este projeto inclui o backend em Ruby on Rails com uma API para cadastro e controle de usuários de uma empresa fictícia.
 
 Uma versão para testes (backend e frontend) está disponível em
-[https://challenge-marcelo-frontend.herokuapp.com/]
+https://challenge-marcelo-frontend.herokuapp.com/
+
+A versão hospedada no Heroku possui a cache ligada na requisição que traz todos os usuários, e por isso as mudanças acabam sendo refletidas após 1 minuto.
+A busca de usuários não é afetada pela cache e mostra as mudanças sempre atualizadas.
+
+O email de boas vindas, nos testes que fiz com uma conta do Gmail, acabou indo parar na caixa de spam.
 
 As ações disponíveis e seus endpoints estão listados a seguir:
 * Criar usuário - POST /auth
