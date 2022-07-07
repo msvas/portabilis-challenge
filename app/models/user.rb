@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
 
   private
 
-  # Sends welcome email using background processing (sidekiq)
+  # Sends welcome email using background processing
   def send_welcome_email
     UserMailer.welcome(self).deliver_later
   end

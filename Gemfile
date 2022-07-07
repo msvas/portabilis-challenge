@@ -36,9 +36,6 @@ gem "devise"
 # Use Devise Token Auth for authentication using tokens
 gem "devise_token_auth", ">= 1.2.0", git: "https://github.com/lynndylanhurley/devise_token_auth"
 
-# Use Sidekiq basically for asynchronous emails
-gem "sidekiq"
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data"
 
