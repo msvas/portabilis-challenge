@@ -44,6 +44,19 @@ RSpec.describe "Users", type: :request do
       expect(JSON.parse(response.body)[0]['name']).to eq('aa')
     end
 
+    it "sorts users by name and changes direction when params are informed" do
+      user1 = FactoryBot.create(:user, name: 'bb', email: 'bb@bb.com')
+      user2 = FactoryBot.create(:user, name: 'aa', email: 'aa@aa.com')
+      user3 = FactoryBot.create(:user, name: 'zz', email: 'zz@zz.com')
+
+      # Helper that generate auth tokens to send with requests when testing
+      auth_headers1 = user1.create_new_auth_token
+
+      post "/api/v1/users/search", params: { keyword: '', sort: ['name'], direction: 'desc' }, headers: auth_headers1
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)[0]['name']).to eq('zz')
+    end
+
     it "sorts users by email when param is informed" do
       user1 = FactoryBot.create(:user, name: 'bb', email: 'bb@bb.com')
       user2 = FactoryBot.create(:user, name: 'aa', email: 'aa@aa.com')
